@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APA 7 Reference Formatter — Skill Documentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --purple:       #3B2A7A;
+  --purple-mid:   #5C4DB1;
+  --purple-light: #EDE9F8;
+  --gold:         #D4A843;
+  --gold-light:   #FDF6E3;
+  --gray:         #666666;
+  --dark:         #1A1A2E;
+  --border:       #C5BDE8;
+  --bg:           #F9F8FF;
+  --white:        #FFFFFF;
+  --code-bg:      #F0EDF9;
+  --header-h:     88px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* ─── HEADER ─────────────────────────────── */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--purple);
+  border-bottom: 3px solid var(--gold);
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+}
+
+.header-inner {
+  width: 100%;
+  max-width: 1060px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.header-left { display: flex; flex-direction: column; gap: 3px; }
+
+.skill-badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(212,168,67,.14);
+  border: 1px solid rgba(212,168,67,.35);
+  padding: 2px 9px;
+  border-radius: 2px;
+  width: fit-content;
+}
+
+header h1 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -.02em;
+}
+
+header p.sub {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(255,255,255,.55);
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.gh-link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: rgba(255,255,255,.6);
+  text-decoration: none;
+  padding: 5px 12px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 3px;
+  transition: all .15s;
+}
+.gh-link:hover { color: #fff; border-color: rgba(255,255,255,.4); background: rgba(255,255,255,.07); }
+.gh-link svg { width: 14px; height: 14px; fill: currentColor; }
+
+.version-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: rgba(255,255,255,.3);
+}
+
+/* ─── LAYOUT ──────────────────────────────── */
+.page-wrap {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 0 40px 80px;
+  display: grid;
+  grid-template-columns: 192px 1fr;
+  gap: 0 44px;
+}
+
+/* ─── SIDEBAR ─────────────────────────────── */
+aside {
+  position: sticky;
+  top: calc(var(--header-h) + 28px);
+  align-self: start;
+  padding-top: 32px;
+}
+
+.nav-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: #aaa;
+  padding: 0 0 8px 11px;
+}
+
+nav a {
+  display: block;
+  font-size: 12.5px;
+  color: var(--gray);
+  text-decoration: none;
+  padding: 5px 11px;
+  border-left: 2px solid transparent;
+  border-radius: 0 2px 2px 0;
+  transition: all .12s;
+  line-height: 1.35;
+}
+nav a:hover { color: var(--purple); border-left-color: var(--border); background: var(--purple-light); }
+nav a.active { color: var(--purple); border-left-color: var(--purple); background: var(--purple-light); font-weight: 600; }
+nav a.sub { padding-left: 22px; font-size: 11.5px; color: #999; }
+nav a.sub:hover, nav a.sub.active { color: var(--purple-mid); border-left-color: var(--purple-mid); }
+
+.nav-divider { height: 1px; background: var(--border); margin: 8px 0; }
+
+/* ─── MAIN ────────────────────────────────── */
+main { padding-top: 32px; min-width: 0; }
+
+/* ─── SECTIONS ────────────────────────────── */
+.section { margin-bottom: 48px; }
+
+h2 {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--purple);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+h2::before { content: ''; display: inline-block; width: 7px; height: 7px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+
+h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark);
+  margin: 22px 0 8px;
+  padding-left: 10px;
+  border-left: 3px solid var(--purple-mid);
+}
+
+/* ─── DESCRIPTION BLOCK ───────────────────── */
+.desc-block {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--purple);
+  padding: 16px 20px;
+  border-radius: 0 3px 3px 0;
+  margin-bottom: 32px;
+}
+.desc-block .label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: var(--purple-mid);
+  margin-bottom: 7px;
+}
+.desc-block p { font-size: 13px; color: var(--gray); }
+
+.pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.pill {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  background: var(--code-bg);
+  color: var(--purple-mid);
+  border: 1px solid var(--border);
+  padding: 2px 9px;
+  border-radius: 2px;
+}
+
+/* ─── FRONTMATTER ─────────────────────────── */
+.frontmatter {
+  position: relative;
+  background: var(--dark);
+  border-radius: 4px;
+  padding: 20px 22px 44px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.frontmatter::after {
+  content: 'SKILL FRONTMATTER';
+  position: absolute;
+  top: 12px; right: 16px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .14em;
+  color: rgba(255,255,255,.18);
+}
+.frontmatter pre {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  line-height: 1.75;
+  white-space: pre;
+  overflow-x: auto;
+}
+.fm-punct { color: rgba(255,255,255,.3); }
+.fm-key   { color: #9B8DE8; }
+.fm-val   { color: #A8D8A8; }
+
+.copy-btn {
+  position: absolute;
+  bottom: 12px; right: 14px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  background: rgba(255,255,255,.07);
+  color: rgba(255,255,255,.45);
+  border: 1px solid rgba(255,255,255,.12);
+  padding: 3px 11px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all .13s;
+}
+.copy-btn:hover { background: rgba(255,255,255,.14); color: #fff; }
+
+/* ─── RULES LIST ──────────────────────────── */
+ul.rules { list-style: none; }
+ul.rules li {
+  font-size: 13px;
+  color: #444;
+  padding: 7px 0 7px 20px;
+  border-bottom: 1px dashed #E8E4F5;
+  position: relative;
+}
+ul.rules li:last-child { border-bottom: none; }
+ul.rules li::before { content: '—'; position: absolute; left: 0; color: var(--border); font-family: 'IBM Plex Mono', monospace; }
+ul.rules li strong { color: var(--dark); }
+ul.rules li code { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; background: var(--code-bg); color: var(--purple-mid); padding: 1px 5px; border-radius: 2px; }
+
+/* ─── CODE BLOCK ──────────────────────────── */
+.code-block {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--purple-mid);
+  padding: 12px 16px;
+  margin: 8px 0 14px;
+  border-radius: 0 3px 3px 0;
+  overflow-x: auto;
+}
+.code-block code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: var(--purple);
+  line-height: 1.65;
+  white-space: pre;
+  display: block;
+}
+.code-block .cm { color: var(--gray); font-style: italic; }
+
+ul.sub { list-style: none; padding: 0 0 8px 8px; }
+ul.sub li { font-size: 12.5px; color: var(--gray); padding: 3px 0 3px 16px; position: relative; }
+ul.sub li::before { content: '·'; position: absolute; left: 4px; color: var(--purple-mid); }
+ul.sub li code { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; background: var(--code-bg); color: var(--purple-mid); padding: 1px 4px; border-radius: 2px; }
+
+/* ─── TURKISH BOX ─────────────────────────── */
+.turkish-box {
+  background: var(--gold-light);
+  border: 1px solid #E8D4A0;
+  border-left: 4px solid var(--gold);
+  padding: 14px 18px;
+  border-radius: 0 3px 3px 0;
+  margin-bottom: 16px;
+}
+.turkish-box .label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: #9A7015;
+  margin-bottom: 9px;
+}
+.turkish-box ol { padding-left: 18px; font-size: 13px; color: #555; }
+.turkish-box ol li { margin-bottom: 5px; }
+
+/* ─── EXAMPLE PAIR ────────────────────────── */
+.example-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 10px 0 18px;
+}
+.ex-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 5px;
+}
+.ex-before .code-block { border-left-color: #CCCCCC; }
+.ex-after  .code-block { border-left-color: var(--gold); }
+
+/* ─── ERROR TABLE ─────────────────────────── */
+.error-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 10px; }
+.error-table th {
+  background: var(--purple);
+  color: #fff;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  padding: 9px 14px;
+  text-align: left;
+}
+.error-table td { padding: 8px 14px; border-bottom: 1px solid #E8E4F5; vertical-align: top; color: #444; }
+.error-table tr:nth-child(even) td { background: var(--purple-light); }
+.flag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--purple-mid);
+  background: var(--code-bg);
+  padding: 1px 7px;
+  border-radius: 2px;
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+/* ─── OUTPUT STEPS ────────────────────────── */
+.steps { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+.step { display: flex; align-items: flex-start; gap: 14px; background: var(--white); border: 1px solid var(--border); padding: 12px 16px; border-radius: 3px; }
+.step-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--purple);
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px;
+}
+.step-text { font-size: 13px; color: #444; }
+.step-text strong { color: var(--dark); }
+.step-text code { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; background: var(--code-bg); color: var(--purple-mid); padding: 1px 5px; border-radius: 2px; }
+
+/* ─── FOOTER ──────────────────────────────── */
+footer {
+  background: var(--purple);
+  border-top: 2px solid var(--gold);
+  padding: 20px 40px;
+  text-align: center;
+}
+footer p {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: rgba(255,255,255,.4);
+}
+footer a { color: rgba(255,255,255,.6); text-decoration: none; }
+footer a:hover { color: var(--gold); }
+
+/* ─── RESPONSIVE ──────────────────────────── */
+@media (max-width: 720px) {
+  .page-wrap { grid-template-columns: 1fr; padding: 0 20px 60px; }
+  aside { position: static; padding-top: 24px; }
+  nav { display: flex; flex-wrap: wrap; gap: 4px; }
+  nav a { border: 1px solid var(--border); border-left: 2px solid transparent; border-radius: 2px; padding: 4px 10px; }
+  .nav-divider { display: none; }
+  .example-pair { grid-template-columns: 1fr; }
+  header { height: auto; padding: 16px 20px; }
+  .header-right { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="header-inner">
+    <div class="header-left">
+      <span class="skill-badge">skill / apa7-formatter</span>
+      <h1>APA 7 Reference Formatter</h1>
+      <p class="sub">Academic reference list cleanup &amp; Turkish title translation</p>
+    </div>
+    <div class="header-right">
+      <a class="gh-link" href="https://github.com/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        View on GitHub
+      </a>
+      <span class="version-tag">v1.0 · PedPer · 2025</span>
+    </div>
+  </div>
+</header>
+
+<!-- ── PAGE WRAP ── -->
+<div class="page-wrap">
+
+  <!-- ── SIDEBAR ── -->
+  <aside>
+    <p class="nav-label">Contents</p>
+    <nav id="sidenav">
+      <a href="#frontmatter">Frontmatter</a>
+      <a href="#triggers">Trigger Phrases</a>
+      <div class="nav-divider"></div>
+      <a href="#general">General Rules</a>
+      <a href="#journals" class="sub">Journal Articles</a>
+      <a href="#books" class="sub">Books</a>
+      <a href="#chapters" class="sub">Edited Chapters</a>
+      <a href="#theses" class="sub">Theses</a>
+      <a href="#conf" class="sub">Conference</a>
+      <a href="#other" class="sub">Reports &amp; Misc</a>
+      <div class="nav-divider"></div>
+      <a href="#turkish">Turkish Titles</a>
+      <a href="#errors">Error Flags</a>
+      <a href="#output">Output Format</a>
+      <a href="#examples">Examples</a>
+    </nav>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main>
+
+    <!-- Frontmatter -->
+    <div class="section" id="frontmatter">
+      <h2>Frontmatter</h2>
+      <div class="frontmatter">
+        <pre><span class="fm-punct">---</span>
+<span class="fm-key">name</span><span class="fm-punct">: </span><span class="fm-val">apa7-formatter</span>
+<span class="fm-key">description</span><span class="fm-punct">: &gt;</span>
+<span class="fm-val">  Formats academic reference lists according to APA 7th edition rules.</span>
+<span class="fm-val">  Use this skill whenever the user pastes a list of references and asks</span>
+<span class="fm-val">  for APA 7 formatting, cleanup, or translation of Turkish titles into</span>
+<span class="fm-val">  English. Triggers on phrases like "APA 7'ye göre düzenle",</span>
+<span class="fm-val">  "kaynakçayı düzelt", "format references", "APA formatına çevir",</span>
+<span class="fm-val">  or when a block of bibliographic entries is pasted with a formatting</span>
+<span class="fm-val">  request. Also triggers when the user asks for Turkish book/article</span>
+<span class="fm-val">  titles to be translated into English in bracket notation.</span>
+<span class="fm-punct">---</span></pre>
+        <button class="copy-btn" onclick="copyFM(this)">copy</button>
+      </div>
+    </div>
+
+    <!-- Triggers -->
+    <div class="section" id="triggers">
+      <h2>Trigger Phrases</h2>
+      <div class="desc-block">
+        <p class="label">When this skill activates</p>
+        <p>Claude consults this skill whenever any of the following phrases appear, or when a raw reference list is pasted alongside a formatting request.</p>
+        <div class="pills">
+          <span class="pill">APA 7'ye göre düzenle</span>
+          <span class="pill">kaynakçayı düzelt</span>
+          <span class="pill">format references</span>
+          <span class="pill">APA formatına çevir</span>
+          <span class="pill">Türkçe başlıkları çevir</span>
+          <span class="pill">fix bibliography</span>
+          <span class="pill">reference list + paste</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- General Rules -->
+    <div class="section" id="general">
+      <h2>Core APA 7 Rules</h2>
+      <ul class="rules">
+        <li><strong>No publication place</strong> for books — only publisher name (<code>Sage.</code> not <code>New York: Sage.</code>)</li>
+        <li><strong>Publisher name</strong> — shortened official form (<code>Sage</code> not <code>Sage Publications</code>)</li>
+        <li><strong>DOI format</strong> — always <code>https://doi.org/…</code>; replace <code>http://dx.doi.org/</code> and bare DOIs</li>
+        <li><strong>Italics</strong> — journal name + volume number; book titles; edited book titles</li>
+        <li><strong>Author count</strong> — list all up to 20; for 21+ list first 19, then <code>…</code>, then last author</li>
+        <li><strong>"Retrieved from"</strong> — remove for stable URLs/DOIs; keep only for content that changes over time</li>
+        <li><strong>Edition info</strong> — <code>(3rd ed.)</code> after title, before period, before publisher</li>
+      </ul>
+
+      <h3 id="journals">Journal Articles</h3>
+      <div class="code-block">
+        <code>Author, A. A., &amp; Author, B. B. (Year). Title of article.
+  *Journal Name*, *vol*(issue), pages. https://doi.org/xxx</code>
+      </div>
+      <ul class="sub">
+        <li>Article title: sentence case, no italics</li>
+        <li>Journal name: Title Case, italicized; Volume: italicized, no label</li>
+        <li>Issue: not italicized, in parentheses immediately after volume</li>
+        <li>No <code>pp.</code> prefix for page ranges in journals</li>
+      </ul>
+
+      <h3 id="books">Books</h3>
+      <div class="code-block">
+        <code>Author, A. A. (Year). *Title of book* (Xth ed.). Publisher.</code>
+      </div>
+      <ul class="sub">
+        <li>Title: italicized, sentence case; no publication city</li>
+      </ul>
+
+      <h3 id="chapters">Edited Book Chapters</h3>
+      <div class="code-block">
+        <code>Author, A. A. (Year). Chapter title. In A. Editor &amp; B. Editor (Eds.),
+  *Book Title* (pp. XX–XX). Publisher.</code>
+      </div>
+      <ul class="sub">
+        <li>Use <code>(Ed.)</code> for one editor, <code>(Eds.)</code> for multiple</li>
+        <li>Chapter title: sentence case, no italics; Book title: italicized</li>
+      </ul>
+
+      <h3 id="theses">Dissertations &amp; Theses</h3>
+      <div class="code-block">
+        <code>Surname, A. (Year). *Title* [Unpublished doctoral dissertation]. University.</code>
+      </div>
+      <ul class="sub">
+        <li>Use <code>doctoral dissertation</code> (not "PhD thesis"); <code>master's thesis</code> (lowercase)</li>
+        <li>No publisher or city needed</li>
+      </ul>
+
+      <h3 id="conf">Conference Proceedings</h3>
+      <div class="code-block">
+        <code>Author, A. (Year). Paper title. In A. Editor (Ed.),
+  *Proceedings Title* (pp. XX–XX). Publisher.</code>
+      </div>
+      <ul class="sub">
+        <li>If no editors: <code>In *Proceedings of the Conference Name* (pp. XX–XX).</code></li>
+      </ul>
+
+      <h3 id="other">Reports, Preprints &amp; Web Sources</h3>
+      <div class="code-block">
+        <code><span class="cm">// Institutional / Government Report</span>
+Organization Name [Abbr]. (Year). *Title of report*. https://…
+
+<span class="cm">// Preprint (arXiv, PsyArXiv, etc.)</span>
+Author, A. (Year). *Title*. arXiv. https://arxiv.org/abs/XXXX.XXXXX
+
+<span class="cm">// Web — no DOI available</span>
+Include URL. Remove "Retrieved from" for stable URLs.</code>
+      </div>
+      <ul class="sub">
+        <li>Use <code>Author.</code> only if the organization is both author and publisher</li>
+      </ul>
+    </div>
+
+    <!-- Turkish Titles -->
+    <div class="section" id="turkish">
+      <h2>Turkish Title Translation</h2>
+      <div class="turkish-box">
+        <p class="label">Rule — applies to every Turkish-language title</p>
+        <ol>
+          <li>Append English translation in square brackets <strong>immediately after</strong> the original title</li>
+          <li>Do <strong>not</strong> italicize the bracketed translation for non-book titles (articles, chapters)</li>
+          <li><strong>Do</strong> italicize the translation when it sits inside an already-italicized block (book/thesis title)</li>
+        </ol>
+      </div>
+
+      <div class="example-pair">
+        <div class="ex-before">
+          <p class="ex-label">Article — before</p>
+          <div class="code-block"><code>Çocuklarda zihin kuramının gelişimi.
+Journal of Edu, 5(2), 10–20.</code></div>
+        </div>
+        <div class="ex-after">
+          <p class="ex-label">Article — after</p>
+          <div class="code-block"><code>Çocuklarda zihin kuramının gelişimi
+[Development of theory of mind].
+*Journal of Edu*, *5*(2), 10–20.</code></div>
+        </div>
+      </div>
+
+      <div class="example-pair">
+        <div class="ex-before">
+          <p class="ex-label">Book — before</p>
+          <div class="code-block"><code>Bilimsel araştırma yöntemi (25th ed.).
+Ankara: Nobel Publishing.</code></div>
+        </div>
+        <div class="ex-after">
+          <p class="ex-label">Book — after</p>
+          <div class="code-block"><code>*Bilimsel araştırma yöntemi*
+[*Scientific research method*]
+(25th ed.). Nobel Publishing.</code></div>
+        </div>
+      </div>
+
+      <div class="example-pair">
+        <div class="ex-before">
+          <p class="ex-label">Thesis — before</p>
+          <div class="code-block"><code>Öğretmenlerin istatistik bilgisi
+[Unpublished master's thesis].
+Trabzon University.</code></div>
+        </div>
+        <div class="ex-after">
+          <p class="ex-label">Thesis — after</p>
+          <div class="code-block"><code>*Öğretmenlerin istatistik bilgisi*
+[*Teachers' knowledge of statistics*]
+[Unpublished master's thesis].
+Trabzon University.</code></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error Flags -->
+    <div class="section" id="errors">
+      <h2>Error Detection &amp; Flags</h2>
+      <p style="font-size:13px;color:var(--gray);margin-bottom:12px;">Flag suspicious entries inline. Include a summary in the notes block at the top of each response.</p>
+      <table class="error-table">
+        <thead>
+          <tr><th>Issue</th><th>Inline Flag</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>DOI year ≠ publication year</td><td><span class="flag">[DOI yılı doğrulanmalı]</span></td></tr>
+          <tr><td>Impossible page range (e.g. 212–132)</td><td><span class="flag">[sayfa aralığı doğrulanmalı]</span></td></tr>
+          <tr><td><code>et al.</code> used in reference list</td><td>All authors must be listed explicitly</td></tr>
+          <tr><td>Missing journal or book name</td><td><span class="flag">[dergi/kitap adı eksik]</span></td></tr>
+          <tr><td>Likely typo in author name</td><td>Correct + <span class="flag">[doğrulanmalı]</span></td></tr>
+          <tr><td>Dual publication years (e.g. 1995, 2006)</td><td><span class="flag">[tarih doğrulanmalı]</span></td></tr>
+          <tr><td><code>[In press]</code> entries</td><td>Keep as-is; complete when published</td></tr>
+          <tr><td>Missing page numbers for book chapter</td><td><span class="flag">[sayfa numarası tamamlanmalı]</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Output Format -->
+    <div class="section" id="output">
+      <h2>Output Format</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>Notes block</strong> at top — bulleted summary of all changes made and errors detected</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>Formatted reference list</strong> — alphabetical by first author surname, hanging indent in markdown</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>Inline flags</strong> on suspicious entries — <code>[doğrulanmalı]</code> or <code>[tamamlanmalı]</code>. No commentary between entries; keep the list clean.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Examples -->
+    <div class="section" id="examples">
+      <h2>Worked Examples</h2>
+
+      <h3>Journal Article</h3>
+      <div class="example-pair">
+        <div class="ex-before">
+          <p class="ex-label">Before</p>
+          <div class="code-block"><code>Ball, D. L., Thames, M. H., & Phelps, G.
+(2008). Content knowledge for teaching:
+What makes it special? Journal of Teacher
+Education, 59(5), 389–407.</code></div>
+        </div>
+        <div class="ex-after">
+          <p class="ex-label">After</p>
+          <div class="code-block"><code>Ball, D. L., Thames, M. H., & Phelps, G.
+(2008). Content knowledge for teaching:
+What makes it special? *Journal of Teacher
+Education*, *59*(5), 389–407.</code></div>
+        </div>
+      </div>
+
+      <h3>Turkish Book with City</h3>
+      <div class="example-pair">
+        <div class="ex-before">
+          <p class="ex-label">Before</p>
+          <div class="code-block"><code>Karasar, N. (2019). Bilimsel araştırma
+yöntemi (25th ed.). Ankara:
+Nobel Publishing.</code></div>
+        </div>
+        <div class="ex-after">
+          <p class="ex-label">After</p>
+          <div class="code-block"><code>Karasar, N. (2019). *Bilimsel araştırma
+yöntemi* [*Scientific research method*]
+(25th ed.). Nobel Publishing.</code></div>
+        </div>
+      </div>
+
+      <h3>Edited Chapter</h3>
+      <div class="example-pair">
+        <div class="ex-before">
+          <p class="ex-label">Before</p>
+          <div class="code-block"><code>Perner, J. (1999). Theory of mind.
+In M. Bennett (Ed.), Developmental
+psychology. Psychology Press.</code></div>
+        </div>
+        <div class="ex-after">
+          <p class="ex-label">After</p>
+          <div class="code-block"><code>Perner, J. (1999). Theory of mind.
+In M. Bennett (Ed.), *Developmental
+psychology*. Psychology Press.</code></div>
+        </div>
+      </div>
+
+      <h3>DOI normalization</h3>
+      <div class="example-pair">
+        <div class="ex-before">
+          <p class="ex-label">Before</p>
+          <div class="code-block"><code>... http://dx.doi.org/10.1007/
+s10648-006-9029-9</code></div>
+        </div>
+        <div class="ex-after">
+          <p class="ex-label">After</p>
+          <div class="code-block"><code>... https://doi.org/10.1007/
+s10648-006-9029-9</code></div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>APA 7 Reference Formatter Skill · <a href="https://pedagogicalperspective.com" target="_blank" rel="noopener">Pedagogical Perspective</a> · eISSN 2822-4841</p>
+</footer>
+
+<script>
+// ── Copy frontmatter ──
+function copyFM(btn) {
+  const text = `---
+name: apa7-formatter
+description: >
+  Formats academic reference lists according to APA 7th edition rules.
+  Use this skill whenever the user pastes a list of references and asks
+  for APA 7 formatting, cleanup, or translation of Turkish titles into
+  English. Triggers on phrases like "APA 7'ye göre düzenle",
+  "kaynakçayı düzelt", "format references", "APA formatına çevir",
+  or when a block of bibliographic entries is pasted with a formatting
+  request. Also triggers when the user asks for Turkish book/article
+  titles to be translated into English in bracket notation.
+---`;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'copied ✓';
+    setTimeout(() => btn.textContent = 'copy', 1800);
+  });
+}
+
+// ── Active nav on scroll ──
+const sections = document.querySelectorAll('.section, h3[id]');
+const allLinks  = document.querySelectorAll('#sidenav a');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const id = entry.target.id;
+    if (!id) return;
+    allLinks.forEach(l => l.classList.remove('active'));
+    const hit = document.querySelector(`#sidenav a[href="#${id}"]`);
+    if (hit) hit.classList.add('active');
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+
+sections.forEach(s => { if (s.id) observer.observe(s); });
+</script>
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>APA 7 Reference Formatter — Skill Documentation</title>
+<title>APA 7 Reference Formatter — Pedagogical Perspective</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
@@ -20,776 +20,657 @@
   --bg:           #F9F8FF;
   --white:        #FFFFFF;
   --code-bg:      #F0EDF9;
-  --header-h:     88px;
+  --header-h:     80px;
+  --red:          #C62828;
 }
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
-
 body {
   font-family: 'IBM Plex Sans', system-ui, sans-serif;
-  background: var(--bg);
-  color: var(--dark);
-  font-size: 14px;
-  line-height: 1.7;
+  background: var(--bg); color: var(--dark);
+  font-size: 14px; line-height: 1.7;
 }
 
-/* ─── HEADER ─────────────────────────────── */
+/* ── HEADER ── */
 header {
-  position: sticky;
-  top: 0;
-  z-index: 200;
-  background: var(--purple);
-  border-bottom: 3px solid var(--gold);
-  height: var(--header-h);
-  display: flex;
-  align-items: center;
-  padding: 0 40px;
+  position: sticky; top: 0; z-index: 200;
+  background: var(--purple); border-bottom: 3px solid var(--gold);
+  height: var(--header-h); display: flex; align-items: center; padding: 0 40px;
 }
-
 .header-inner {
-  width: 100%;
-  max-width: 1060px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+  width: 100%; max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
 }
-
-.header-left { display: flex; flex-direction: column; gap: 3px; }
-
-.skill-badge {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9.5px;
-  font-weight: 600;
-  letter-spacing: .13em;
-  text-transform: uppercase;
-  color: var(--gold);
-  background: rgba(212,168,67,.14);
-  border: 1px solid rgba(212,168,67,.35);
-  padding: 2px 9px;
-  border-radius: 2px;
-  width: fit-content;
+.header-left { display: flex; align-items: center; gap: 16px; }
+.logo-mark {
+  font-family: 'IBM Plex Mono', monospace; font-size: 20px; font-weight: 600;
+  color: var(--gold); background: rgba(212,168,67,.15); border: 1px solid rgba(212,168,67,.3);
+  width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
+  border-radius: 3px; flex-shrink: 0;
 }
-
-header h1 {
-  font-size: 22px;
-  font-weight: 600;
-  color: #fff;
-  letter-spacing: -.02em;
+.header-titles h1 { font-size: 18px; font-weight: 600; color: #fff; letter-spacing: -.02em; }
+.header-titles p  { font-size: 11px; font-weight: 300; color: rgba(255,255,255,.5); }
+.header-right { display: flex; align-items: center; gap: 8px; }
+.tab-btn {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .05em;
+  color: rgba(255,255,255,.55); background: transparent;
+  border: 1px solid rgba(255,255,255,.18); padding: 6px 14px; border-radius: 3px;
+  cursor: pointer; transition: all .15s; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 6px;
 }
+.tab-btn:hover { color: #fff; border-color: rgba(255,255,255,.4); background: rgba(255,255,255,.07); }
+.tab-btn.active { color: var(--gold); border-color: var(--gold); background: rgba(212,168,67,.1); }
+.tab-btn svg { width: 13px; height: 13px; fill: currentColor; }
 
-header p.sub {
-  font-size: 12px;
-  font-weight: 300;
-  color: rgba(255,255,255,.55);
-}
+/* ── PAGES ── */
+.page { display: none; }
+.page.active { display: block; }
 
-.header-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 6px;
-}
+/* ══ FORMATTER ══ */
+.formatter-wrap { max-width: 1200px; margin: 0 auto; padding: 28px 32px 60px; }
 
-.gh-link {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  color: rgba(255,255,255,.6);
-  text-decoration: none;
-  padding: 5px 12px;
-  border: 1px solid rgba(255,255,255,.18);
-  border-radius: 3px;
-  transition: all .15s;
+.api-bar {
+  background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--gold);
+  padding: 12px 18px; border-radius: 0 3px 3px 0; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
 }
-.gh-link:hover { color: #fff; border-color: rgba(255,255,255,.4); background: rgba(255,255,255,.07); }
-.gh-link svg { width: 14px; height: 14px; fill: currentColor; }
+.api-bar label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--gray); white-space: nowrap;
+}
+.api-bar input {
+  flex: 1; min-width: 240px; font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; color: var(--dark); background: var(--bg);
+  border: 1px solid var(--border); padding: 7px 12px; border-radius: 3px;
+  outline: none; transition: border-color .15s;
+}
+.api-bar input:focus { border-color: var(--purple-mid); }
+.api-bar .hint { font-size: 11.5px; color: var(--gray); flex-basis: 100%; margin-top: 2px; }
+.api-bar .hint a { color: var(--purple-mid); text-decoration: none; }
+.api-bar .hint a:hover { text-decoration: underline; }
 
-.version-tag {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  color: rgba(255,255,255,.3);
+.options-row {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 16px; flex-wrap: wrap;
 }
+.opt-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--gray);
+}
+.check-wrap { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: #444; cursor: pointer; }
+.check-wrap input[type=checkbox] { accent-color: var(--purple); width: 14px; height: 14px; cursor: pointer; }
 
-/* ─── LAYOUT ──────────────────────────────── */
-.page-wrap {
-  max-width: 1060px;
-  margin: 0 auto;
-  padding: 0 40px 80px;
-  display: grid;
-  grid-template-columns: 192px 1fr;
-  gap: 0 44px;
-}
+.editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
-/* ─── SIDEBAR ─────────────────────────────── */
-aside {
-  position: sticky;
-  top: calc(var(--header-h) + 28px);
-  align-self: start;
-  padding-top: 32px;
+.panel {
+  display: flex; flex-direction: column; background: var(--white);
+  border: 1px solid var(--border); border-radius: 4px; overflow: hidden;
 }
+.panel-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px; background: var(--purple); border-bottom: 2px solid var(--gold);
+}
+.panel-title {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.8);
+  display: flex; align-items: center; gap: 8px;
+}
+.panel-title .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); }
+.panel-actions { display: flex; gap: 6px; }
+.panel-btn {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .05em;
+  color: rgba(255,255,255,.6); background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.15); padding: 4px 10px; border-radius: 2px;
+  cursor: pointer; transition: all .13s; display: flex; align-items: center; gap: 5px;
+}
+.panel-btn:hover { background: rgba(255,255,255,.18); color: #fff; }
+.panel-btn svg { width: 11px; height: 11px; fill: currentColor; }
 
-.nav-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9px;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: #aaa;
-  padding: 0 0 8px 11px;
+textarea.input-area {
+  flex: 1; min-height: 440px; font-family: 'IBM Plex Mono', monospace;
+  font-size: 12.5px; line-height: 1.7; color: var(--dark); background: var(--white);
+  border: none; resize: vertical; outline: none; padding: 18px;
 }
+textarea.input-area::placeholder { color: #BBB; font-style: italic; }
 
-nav a {
-  display: block;
-  font-size: 12.5px;
-  color: var(--gray);
-  text-decoration: none;
-  padding: 5px 11px;
-  border-left: 2px solid transparent;
-  border-radius: 0 2px 2px 0;
-  transition: all .12s;
-  line-height: 1.35;
+.output-area {
+  flex: 1; min-height: 440px; padding: 18px; overflow-y: auto;
+  font-size: 12.5px; line-height: 1.8; color: var(--dark);
 }
-nav a:hover { color: var(--purple); border-left-color: var(--border); background: var(--purple-light); }
-nav a.active { color: var(--purple); border-left-color: var(--purple); background: var(--purple-light); font-weight: 600; }
+.output-area.empty {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px; color: #CCC; font-family: 'IBM Plex Sans', sans-serif; font-size: 13px;
+}
+.output-area.empty svg { width: 36px; height: 36px; fill: #DDD; }
+.output-area.loading {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 14px; color: var(--gray); font-family: 'IBM Plex Sans', sans-serif; font-size: 13px;
+}
+.spinner {
+  width: 32px; height: 32px; border: 3px solid var(--purple-light);
+  border-top-color: var(--purple); border-radius: 50%; animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.notes-block {
+  background: var(--gold-light); border: 1px solid #E8D4A0; border-left: 3px solid var(--gold);
+  padding: 10px 14px; border-radius: 0 3px 3px 0; margin-bottom: 16px;
+  font-family: 'IBM Plex Sans', sans-serif; font-size: 12px; color: #555; line-height: 1.6;
+}
+.notes-block .notes-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: .13em;
+  text-transform: uppercase; color: #9A7015; margin-bottom: 6px;
+}
+.refs-output {
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.85;
+  color: var(--dark); white-space: pre-wrap; word-break: break-word;
+}
+.refs-output .flag { color: var(--red); font-weight: 600; }
+
+.format-btn-row { display: flex; justify-content: center; margin: 16px 0 0; }
+.format-btn {
+  font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600;
+  letter-spacing: .06em; color: #fff; background: var(--purple);
+  border: none; border-bottom: 3px solid var(--gold); padding: 12px 40px; border-radius: 3px;
+  cursor: pointer; transition: all .15s; display: flex; align-items: center; gap: 10px;
+}
+.format-btn:hover { background: var(--purple-mid); }
+.format-btn:disabled { opacity: .55; cursor: not-allowed; }
+.format-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+.error-toast {
+  display: none; background: #FDECEA; border: 1px solid #F5C6CB;
+  border-left: 4px solid var(--red); padding: 10px 16px; border-radius: 0 3px 3px 0;
+  font-size: 12.5px; color: #7B1A1A; margin-top: 12px;
+}
+.error-toast.visible { display: block; }
+
+/* ══ DOCS ══ */
+.docs-wrap {
+  max-width: 1060px; margin: 0 auto; padding: 0 40px 80px;
+  display: grid; grid-template-columns: 192px 1fr; gap: 0 44px;
+}
+aside { position: sticky; top: calc(var(--header-h) + 28px); align-self: start; padding-top: 32px; }
+.nav-lbl { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: .15em; text-transform: uppercase; color: #aaa; padding: 0 0 8px 11px; }
+nav a { display: block; font-size: 12.5px; color: var(--gray); text-decoration: none; padding: 5px 11px; border-left: 2px solid transparent; border-radius: 0 2px 2px 0; transition: all .12s; }
+nav a:hover, nav a.active { color: var(--purple); border-left-color: var(--purple); background: var(--purple-light); }
 nav a.sub { padding-left: 22px; font-size: 11.5px; color: #999; }
 nav a.sub:hover, nav a.sub.active { color: var(--purple-mid); border-left-color: var(--purple-mid); }
-
-.nav-divider { height: 1px; background: var(--border); margin: 8px 0; }
-
-/* ─── MAIN ────────────────────────────────── */
-main { padding-top: 32px; min-width: 0; }
-
-/* ─── SECTIONS ────────────────────────────── */
+.nav-div { height: 1px; background: var(--border); margin: 8px 0; }
+.docs-main { padding-top: 32px; min-width: 0; }
 .section { margin-bottom: 48px; }
-
-h2 {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .12em;
-  color: var(--purple);
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 18px;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
+h2 { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; color: var(--purple); padding-bottom: 10px; border-bottom: 1px solid var(--border); margin-bottom: 18px; display: flex; align-items: center; gap: 9px; }
 h2::before { content: ''; display: inline-block; width: 7px; height: 7px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
-
-h3 {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--dark);
-  margin: 22px 0 8px;
-  padding-left: 10px;
-  border-left: 3px solid var(--purple-mid);
-}
-
-/* ─── DESCRIPTION BLOCK ───────────────────── */
-.desc-block {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--purple);
-  padding: 16px 20px;
-  border-radius: 0 3px 3px 0;
-  margin-bottom: 32px;
-}
-.desc-block .label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9.5px;
-  letter-spacing: .11em;
-  text-transform: uppercase;
-  color: var(--purple-mid);
-  margin-bottom: 7px;
-}
-.desc-block p { font-size: 13px; color: var(--gray); }
-
-.pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
-.pill {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  background: var(--code-bg);
-  color: var(--purple-mid);
-  border: 1px solid var(--border);
-  padding: 2px 9px;
-  border-radius: 2px;
-}
-
-/* ─── FRONTMATTER ─────────────────────────── */
-.frontmatter {
-  position: relative;
-  background: var(--dark);
-  border-radius: 4px;
-  padding: 20px 22px 44px;
-  overflow: hidden;
-  margin-bottom: 8px;
-}
-.frontmatter::after {
-  content: 'SKILL FRONTMATTER';
-  position: absolute;
-  top: 12px; right: 16px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9px;
-  letter-spacing: .14em;
-  color: rgba(255,255,255,.18);
-}
-.frontmatter pre {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 12px;
-  line-height: 1.75;
-  white-space: pre;
-  overflow-x: auto;
-}
-.fm-punct { color: rgba(255,255,255,.3); }
-.fm-key   { color: #9B8DE8; }
-.fm-val   { color: #A8D8A8; }
-
-.copy-btn {
-  position: absolute;
-  bottom: 12px; right: 14px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  background: rgba(255,255,255,.07);
-  color: rgba(255,255,255,.45);
-  border: 1px solid rgba(255,255,255,.12);
-  padding: 3px 11px;
-  border-radius: 2px;
-  cursor: pointer;
-  transition: all .13s;
-}
-.copy-btn:hover { background: rgba(255,255,255,.14); color: #fff; }
-
-/* ─── RULES LIST ──────────────────────────── */
+h3 { font-size: 13px; font-weight: 600; color: var(--dark); margin: 22px 0 8px; padding-left: 10px; border-left: 3px solid var(--purple-mid); }
 ul.rules { list-style: none; }
-ul.rules li {
-  font-size: 13px;
-  color: #444;
-  padding: 7px 0 7px 20px;
-  border-bottom: 1px dashed #E8E4F5;
-  position: relative;
-}
+ul.rules li { font-size: 13px; color: #444; padding: 7px 0 7px 20px; border-bottom: 1px dashed #E8E4F5; position: relative; }
 ul.rules li:last-child { border-bottom: none; }
 ul.rules li::before { content: '—'; position: absolute; left: 0; color: var(--border); font-family: 'IBM Plex Mono', monospace; }
 ul.rules li strong { color: var(--dark); }
-ul.rules li code { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; background: var(--code-bg); color: var(--purple-mid); padding: 1px 5px; border-radius: 2px; }
-
-/* ─── CODE BLOCK ──────────────────────────── */
-.code-block {
-  background: var(--code-bg);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--purple-mid);
-  padding: 12px 16px;
-  margin: 8px 0 14px;
-  border-radius: 0 3px 3px 0;
-  overflow-x: auto;
-}
-.code-block code {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 12px;
-  color: var(--purple);
-  line-height: 1.65;
-  white-space: pre;
-  display: block;
-}
+ul.rules li code, ul.sr li code { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; background: var(--code-bg); color: var(--purple-mid); padding: 1px 5px; border-radius: 2px; }
+.code-block { background: var(--code-bg); border: 1px solid var(--border); border-left: 3px solid var(--purple-mid); padding: 12px 16px; margin: 8px 0 14px; border-radius: 0 3px 3px 0; overflow-x: auto; }
+.code-block code { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--purple); line-height: 1.65; white-space: pre; display: block; }
 .code-block .cm { color: var(--gray); font-style: italic; }
-
-ul.sub { list-style: none; padding: 0 0 8px 8px; }
-ul.sub li { font-size: 12.5px; color: var(--gray); padding: 3px 0 3px 16px; position: relative; }
-ul.sub li::before { content: '·'; position: absolute; left: 4px; color: var(--purple-mid); }
-ul.sub li code { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; background: var(--code-bg); color: var(--purple-mid); padding: 1px 4px; border-radius: 2px; }
-
-/* ─── TURKISH BOX ─────────────────────────── */
-.turkish-box {
-  background: var(--gold-light);
-  border: 1px solid #E8D4A0;
-  border-left: 4px solid var(--gold);
-  padding: 14px 18px;
-  border-radius: 0 3px 3px 0;
-  margin-bottom: 16px;
-}
-.turkish-box .label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9.5px;
-  letter-spacing: .11em;
-  text-transform: uppercase;
-  color: #9A7015;
-  margin-bottom: 9px;
-}
+ul.sr { list-style: none; padding: 0 0 8px 8px; }
+ul.sr li { font-size: 12.5px; color: var(--gray); padding: 3px 0 3px 16px; position: relative; }
+ul.sr li::before { content: '·'; position: absolute; left: 4px; color: var(--purple-mid); }
+.turkish-box { background: var(--gold-light); border: 1px solid #E8D4A0; border-left: 4px solid var(--gold); padding: 14px 18px; border-radius: 0 3px 3px 0; margin-bottom: 16px; }
+.turkish-box .lbl { font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: .11em; text-transform: uppercase; color: #9A7015; margin-bottom: 9px; }
 .turkish-box ol { padding-left: 18px; font-size: 13px; color: #555; }
 .turkish-box ol li { margin-bottom: 5px; }
-
-/* ─── EXAMPLE PAIR ────────────────────────── */
-.example-pair {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin: 10px 0 18px;
-}
-.ex-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9.5px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--gray);
-  margin-bottom: 5px;
-}
-.ex-before .code-block { border-left-color: #CCCCCC; }
+.example-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0 18px; }
+.ex-lbl { font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--gray); margin-bottom: 5px; }
+.ex-before .code-block { border-left-color: #CCC; }
 .ex-after  .code-block { border-left-color: var(--gold); }
-
-/* ─── ERROR TABLE ─────────────────────────── */
 .error-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 10px; }
-.error-table th {
-  background: var(--purple);
-  color: #fff;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: .07em;
-  text-transform: uppercase;
-  padding: 9px 14px;
-  text-align: left;
-}
+.error-table th { background: var(--purple); color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .07em; text-transform: uppercase; padding: 9px 14px; text-align: left; }
 .error-table td { padding: 8px 14px; border-bottom: 1px solid #E8E4F5; vertical-align: top; color: #444; }
 .error-table tr:nth-child(even) td { background: var(--purple-light); }
-.flag {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  color: var(--purple-mid);
-  background: var(--code-bg);
-  padding: 1px 7px;
-  border-radius: 2px;
-  border: 1px solid var(--border);
-  white-space: nowrap;
-}
-
-/* ─── OUTPUT STEPS ────────────────────────── */
+.flag-badge { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--purple-mid); background: var(--code-bg); padding: 1px 7px; border-radius: 2px; border: 1px solid var(--border); white-space: nowrap; }
 .steps { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
 .step { display: flex; align-items: flex-start; gap: 14px; background: var(--white); border: 1px solid var(--border); padding: 12px 16px; border-radius: 3px; }
-.step-num {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 12px;
-  font-weight: 600;
-  color: #fff;
-  background: var(--purple);
-  width: 24px; height: 24px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; margin-top: 2px;
-}
+.step-num { font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; color: #fff; background: var(--purple); width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
 .step-text { font-size: 13px; color: #444; }
 .step-text strong { color: var(--dark); }
-.step-text code { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; background: var(--code-bg); color: var(--purple-mid); padding: 1px 5px; border-radius: 2px; }
 
-/* ─── FOOTER ──────────────────────────────── */
-footer {
-  background: var(--purple);
-  border-top: 2px solid var(--gold);
-  padding: 20px 40px;
-  text-align: center;
-}
-footer p {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  color: rgba(255,255,255,.4);
-}
-footer a { color: rgba(255,255,255,.6); text-decoration: none; }
+/* ── FOOTER ── */
+footer { background: var(--purple); border-top: 2px solid var(--gold); padding: 18px 40px; text-align: center; }
+footer p { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: rgba(255,255,255,.38); }
+footer a { color: rgba(255,255,255,.55); text-decoration: none; }
 footer a:hover { color: var(--gold); }
 
-/* ─── RESPONSIVE ──────────────────────────── */
-@media (max-width: 720px) {
-  .page-wrap { grid-template-columns: 1fr; padding: 0 20px 60px; }
-  aside { position: static; padding-top: 24px; }
+/* ── RESPONSIVE ── */
+@media (max-width: 800px) {
+  .editor-grid { grid-template-columns: 1fr; }
+  .docs-wrap { grid-template-columns: 1fr; padding: 0 20px 60px; }
+  aside { position: static; padding-top: 20px; }
   nav { display: flex; flex-wrap: wrap; gap: 4px; }
   nav a { border: 1px solid var(--border); border-left: 2px solid transparent; border-radius: 2px; padding: 4px 10px; }
-  .nav-divider { display: none; }
   .example-pair { grid-template-columns: 1fr; }
-  header { height: auto; padding: 16px 20px; }
-  .header-right { display: none; }
+  header { height: auto; padding: 14px 20px; }
+  .formatter-wrap { padding: 20px 16px 60px; }
 }
 </style>
 </head>
 <body>
 
-<!-- ── HEADER ── -->
 <header>
   <div class="header-inner">
     <div class="header-left">
-      <span class="skill-badge">skill / apa7-formatter</span>
-      <h1>APA 7 Reference Formatter</h1>
-      <p class="sub">Academic reference list cleanup &amp; Turkish title translation</p>
+      <div class="logo-mark">PP</div>
+      <div class="header-titles">
+        <h1>APA 7 Reference Formatter</h1>
+        <p>Pedagogical Perspective · eISSN 2822-4841</p>
+      </div>
     </div>
     <div class="header-right">
-      <a class="gh-link" href="https://github.com/" target="_blank" rel="noopener">
+      <button class="tab-btn active" onclick="showPage('formatter',this)">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM8 13h8v1.5H8V13zm0 3h8v1.5H8V16zm0-6h3v1.5H8V10z"/></svg>
+        Formatter
+      </button>
+      <button class="tab-btn" onclick="showPage('docs',this)">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        Kurallar
+      </button>
+      <a class="tab-btn" href="https://github.com/pedagogicalperspective/apaformatter" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-        View on GitHub
+        GitHub
       </a>
-      <span class="version-tag">v1.0 · PedPer · 2025</span>
     </div>
   </div>
 </header>
 
-<!-- ── PAGE WRAP ── -->
-<div class="page-wrap">
+<!-- ══ FORMATTER PAGE ══ -->
+<div id="page-formatter" class="page active">
+<div class="formatter-wrap">
 
-  <!-- ── SIDEBAR ── -->
+  <div class="api-bar">
+    <label>Anthropic API Key</label>
+    <input type="password" id="apiKey" placeholder="sk-ant-api03-…" autocomplete="off">
+    <p class="hint">
+      Anahtarınız yalnızca tarayıcınızda kullanılır, hiçbir sunucuya gönderilmez.&nbsp;
+      <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">API anahtarı al →</a>
+    </p>
+  </div>
+
+  <div class="options-row">
+    <span class="opt-label">Seçenekler</span>
+    <label class="check-wrap">
+      <input type="checkbox" id="optTurkish" checked>
+      Türkçe başlıklara İngilizce çeviri ekle
+    </label>
+    <label class="check-wrap">
+      <input type="checkbox" id="optFlags" checked>
+      Hataları işaretle
+    </label>
+  </div>
+
+  <div class="editor-grid">
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title"><span class="dot"></span>Ham Kaynakça</span>
+        <div class="panel-actions">
+          <button class="panel-btn" onclick="clearInput()">
+            <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            Temizle
+          </button>
+        </div>
+      </div>
+      <textarea class="input-area" id="inputArea" placeholder="Kaynakçanızı buraya yapıştırın…
+
+Örnek:
+Anderson, L. W., &amp; Krathwohl, D. R. (2001). A taxonomy for learning, teaching and assessing. New York: Longman.
+
+Bümen, N. T. (2006). Program geliştirmede bir dönüm noktası: Yenilenmiş Bloom taksonomisi. Eğitim ve Bilim, 31(142), 3–14."></textarea>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title"><span class="dot"></span>APA 7 — Düzenlenmiş</span>
+        <div class="panel-actions">
+          <button class="panel-btn" id="copyBtn" onclick="copyOutput()" style="display:none">
+            <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+            Kopyala
+          </button>
+        </div>
+      </div>
+      <div class="output-area empty" id="outputArea">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM8 13h8v1.5H8V13zm0 3h8v1.5H8V16zm0-6h3v1.5H8V10z"/></svg>
+        Düzenlenmiş kaynakça burada görünecek
+      </div>
+    </div>
+  </div>
+
+  <div class="format-btn-row">
+    <button class="format-btn" id="formatBtn" onclick="formatRefs()">
+      <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+      APA 7'ye Göre Düzenle
+    </button>
+  </div>
+  <div class="error-toast" id="errorToast"></div>
+
+</div>
+</div>
+
+<!-- ══ DOCS PAGE ══ -->
+<div id="page-docs" class="page">
+<div class="docs-wrap">
   <aside>
-    <p class="nav-label">Contents</p>
+    <p class="nav-lbl">İçindekiler</p>
     <nav id="sidenav">
-      <a href="#frontmatter">Frontmatter</a>
-      <a href="#triggers">Trigger Phrases</a>
-      <div class="nav-divider"></div>
-      <a href="#general">General Rules</a>
-      <a href="#journals" class="sub">Journal Articles</a>
-      <a href="#books" class="sub">Books</a>
-      <a href="#chapters" class="sub">Edited Chapters</a>
-      <a href="#theses" class="sub">Theses</a>
-      <a href="#conf" class="sub">Conference</a>
-      <a href="#other" class="sub">Reports &amp; Misc</a>
-      <div class="nav-divider"></div>
-      <a href="#turkish">Turkish Titles</a>
-      <a href="#errors">Error Flags</a>
-      <a href="#output">Output Format</a>
-      <a href="#examples">Examples</a>
+      <a href="#general">Genel Kurallar</a>
+      <a href="#journals" class="sub">Dergi Makaleleri</a>
+      <a href="#books" class="sub">Kitaplar</a>
+      <a href="#chapters" class="sub">Editörlü Bölümler</a>
+      <a href="#theses" class="sub">Tezler</a>
+      <a href="#conf" class="sub">Konferans</a>
+      <a href="#other" class="sub">Diğer</a>
+      <div class="nav-div"></div>
+      <a href="#turkish">Türkçe Başlıklar</a>
+      <a href="#errors">Hata Bayrakları</a>
+      <a href="#output">Çıktı Formatı</a>
+      <a href="#examples">Örnekler</a>
     </nav>
   </aside>
 
-  <!-- ── MAIN ── -->
-  <main>
+  <main class="docs-main">
 
-    <!-- Frontmatter -->
-    <div class="section" id="frontmatter">
-      <h2>Frontmatter</h2>
-      <div class="frontmatter">
-        <pre><span class="fm-punct">---</span>
-<span class="fm-key">name</span><span class="fm-punct">: </span><span class="fm-val">apa7-formatter</span>
-<span class="fm-key">description</span><span class="fm-punct">: &gt;</span>
-<span class="fm-val">  Formats academic reference lists according to APA 7th edition rules.</span>
-<span class="fm-val">  Use this skill whenever the user pastes a list of references and asks</span>
-<span class="fm-val">  for APA 7 formatting, cleanup, or translation of Turkish titles into</span>
-<span class="fm-val">  English. Triggers on phrases like "APA 7'ye göre düzenle",</span>
-<span class="fm-val">  "kaynakçayı düzelt", "format references", "APA formatına çevir",</span>
-<span class="fm-val">  or when a block of bibliographic entries is pasted with a formatting</span>
-<span class="fm-val">  request. Also triggers when the user asks for Turkish book/article</span>
-<span class="fm-val">  titles to be translated into English in bracket notation.</span>
-<span class="fm-punct">---</span></pre>
-        <button class="copy-btn" onclick="copyFM(this)">copy</button>
-      </div>
-    </div>
-
-    <!-- Triggers -->
-    <div class="section" id="triggers">
-      <h2>Trigger Phrases</h2>
-      <div class="desc-block">
-        <p class="label">When this skill activates</p>
-        <p>Claude consults this skill whenever any of the following phrases appear, or when a raw reference list is pasted alongside a formatting request.</p>
-        <div class="pills">
-          <span class="pill">APA 7'ye göre düzenle</span>
-          <span class="pill">kaynakçayı düzelt</span>
-          <span class="pill">format references</span>
-          <span class="pill">APA formatına çevir</span>
-          <span class="pill">Türkçe başlıkları çevir</span>
-          <span class="pill">fix bibliography</span>
-          <span class="pill">reference list + paste</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- General Rules -->
     <div class="section" id="general">
-      <h2>Core APA 7 Rules</h2>
+      <h2>Genel APA 7 Kuralları</h2>
       <ul class="rules">
-        <li><strong>No publication place</strong> for books — only publisher name (<code>Sage.</code> not <code>New York: Sage.</code>)</li>
-        <li><strong>Publisher name</strong> — shortened official form (<code>Sage</code> not <code>Sage Publications</code>)</li>
-        <li><strong>DOI format</strong> — always <code>https://doi.org/…</code>; replace <code>http://dx.doi.org/</code> and bare DOIs</li>
-        <li><strong>Italics</strong> — journal name + volume number; book titles; edited book titles</li>
-        <li><strong>Author count</strong> — list all up to 20; for 21+ list first 19, then <code>…</code>, then last author</li>
-        <li><strong>"Retrieved from"</strong> — remove for stable URLs/DOIs; keep only for content that changes over time</li>
-        <li><strong>Edition info</strong> — <code>(3rd ed.)</code> after title, before period, before publisher</li>
+        <li><strong>Yayın yeri yok</strong> — sadece yayınevi (<code>Sage.</code> değil <code>New York: Sage.</code>)</li>
+        <li><strong>Yayınevi adı</strong> — kısaltılmış form (<code>Sage</code> değil <code>Sage Publications</code>)</li>
+        <li><strong>DOI formatı</strong> — her zaman <code>https://doi.org/…</code>; <code>http://dx.doi.org/</code> güncellenir</li>
+        <li><strong>İtalik</strong> — dergi adı + cilt no; kitap başlıkları; editörlü kitap başlıkları</li>
+        <li><strong>Yazar sayısı</strong> — 20'ye kadar tamamı; 21+ için ilk 19, <code>…</code>, son yazar</li>
+        <li><strong>"Retrieved from"</strong> — kalıcı URL/DOI için kaldırılır</li>
+        <li><strong>Baskı bilgisi</strong> — <code>(3rd ed.)</code> başlıktan sonra, yayınevinden önce</li>
       </ul>
 
-      <h3 id="journals">Journal Articles</h3>
-      <div class="code-block">
-        <code>Author, A. A., &amp; Author, B. B. (Year). Title of article.
-  *Journal Name*, *vol*(issue), pages. https://doi.org/xxx</code>
-      </div>
-      <ul class="sub">
-        <li>Article title: sentence case, no italics</li>
-        <li>Journal name: Title Case, italicized; Volume: italicized, no label</li>
-        <li>Issue: not italicized, in parentheses immediately after volume</li>
-        <li>No <code>pp.</code> prefix for page ranges in journals</li>
+      <h3 id="journals">Dergi Makaleleri</h3>
+      <div class="code-block"><code>Yazar, A. A., &amp; Yazar, B. B. (Yıl). Makale başlığı.
+  *Dergi Adı*, *cilt*(sayı), sayfalar. https://doi.org/xxx</code></div>
+      <ul class="sr">
+        <li>Makale başlığı: küçük harf, italik değil</li>
+        <li>Dergi adı: Büyük Harf, italik; Cilt: italik; Sayı: parantez, italik değil</li>
+        <li>Dergi makalelerinde <code>pp.</code> öneki kullanılmaz</li>
       </ul>
 
-      <h3 id="books">Books</h3>
-      <div class="code-block">
-        <code>Author, A. A. (Year). *Title of book* (Xth ed.). Publisher.</code>
-      </div>
-      <ul class="sub">
-        <li>Title: italicized, sentence case; no publication city</li>
+      <h3 id="books">Kitaplar</h3>
+      <div class="code-block"><code>Yazar, A. A. (Yıl). *Kitap başlığı* (Xth ed.). Yayınevi.</code></div>
+      <ul class="sr"><li>Başlık: italik; yayın yeri yok</li></ul>
+
+      <h3 id="chapters">Editörlü Kitap Bölümleri</h3>
+      <div class="code-block"><code>Yazar, A. A. (Yıl). Bölüm başlığı. In A. Editör &amp; B. Editör (Eds.),
+  *Kitap Başlığı* (pp. XX–XX). Yayınevi.</code></div>
+      <ul class="sr">
+        <li>Tek editör: <code>(Ed.)</code>; çok editör: <code>(Eds.)</code></li>
+        <li>Bölüm başlığı: italik değil; kitap başlığı: italik</li>
       </ul>
 
-      <h3 id="chapters">Edited Book Chapters</h3>
-      <div class="code-block">
-        <code>Author, A. A. (Year). Chapter title. In A. Editor &amp; B. Editor (Eds.),
-  *Book Title* (pp. XX–XX). Publisher.</code>
-      </div>
-      <ul class="sub">
-        <li>Use <code>(Ed.)</code> for one editor, <code>(Eds.)</code> for multiple</li>
-        <li>Chapter title: sentence case, no italics; Book title: italicized</li>
+      <h3 id="theses">Tezler</h3>
+      <div class="code-block"><code>Soyad, A. (Yıl). *Başlık* [Unpublished doctoral dissertation]. Üniversite.</code></div>
+      <ul class="sr">
+        <li>Doktora: <code>doctoral dissertation</code>; Yüksek lisans: <code>master's thesis</code></li>
+        <li>Yayınevi veya şehir gerekmez</li>
       </ul>
 
-      <h3 id="theses">Dissertations &amp; Theses</h3>
-      <div class="code-block">
-        <code>Surname, A. (Year). *Title* [Unpublished doctoral dissertation]. University.</code>
-      </div>
-      <ul class="sub">
-        <li>Use <code>doctoral dissertation</code> (not "PhD thesis"); <code>master's thesis</code> (lowercase)</li>
-        <li>No publisher or city needed</li>
-      </ul>
+      <h3 id="conf">Konferans Bildirileri</h3>
+      <div class="code-block"><code>Yazar, A. (Yıl). Bildiri başlığı. In A. Editör (Ed.),
+  *Bildiri Kitabı* (pp. XX–XX). Yayınevi.</code></div>
 
-      <h3 id="conf">Conference Proceedings</h3>
-      <div class="code-block">
-        <code>Author, A. (Year). Paper title. In A. Editor (Ed.),
-  *Proceedings Title* (pp. XX–XX). Publisher.</code>
-      </div>
-      <ul class="sub">
-        <li>If no editors: <code>In *Proceedings of the Conference Name* (pp. XX–XX).</code></li>
-      </ul>
+      <h3 id="other">Raporlar, Preprint ve Web</h3>
+      <div class="code-block"><code><span class="cm">// Kurumsal Rapor</span>
+Kurum [Kısaltma]. (Yıl). *Rapor başlığı*. https://…
 
-      <h3 id="other">Reports, Preprints &amp; Web Sources</h3>
-      <div class="code-block">
-        <code><span class="cm">// Institutional / Government Report</span>
-Organization Name [Abbr]. (Year). *Title of report*. https://…
-
-<span class="cm">// Preprint (arXiv, PsyArXiv, etc.)</span>
-Author, A. (Year). *Title*. arXiv. https://arxiv.org/abs/XXXX.XXXXX
-
-<span class="cm">// Web — no DOI available</span>
-Include URL. Remove "Retrieved from" for stable URLs.</code>
-      </div>
-      <ul class="sub">
-        <li>Use <code>Author.</code> only if the organization is both author and publisher</li>
-      </ul>
+<span class="cm">// arXiv Preprint</span>
+Yazar, A. (Yıl). *Başlık*. arXiv. https://arxiv.org/abs/XXXX.XXXXX</code></div>
     </div>
 
-    <!-- Turkish Titles -->
     <div class="section" id="turkish">
-      <h2>Turkish Title Translation</h2>
+      <h2>Türkçe Başlık Çevirisi</h2>
       <div class="turkish-box">
-        <p class="label">Rule — applies to every Turkish-language title</p>
+        <p class="lbl">Kural — tüm Türkçe başlıklar için geçerli</p>
         <ol>
-          <li>Append English translation in square brackets <strong>immediately after</strong> the original title</li>
-          <li>Do <strong>not</strong> italicize the bracketed translation for non-book titles (articles, chapters)</li>
-          <li><strong>Do</strong> italicize the translation when it sits inside an already-italicized block (book/thesis title)</li>
+          <li>İngilizce çeviri, orijinal başlıktan hemen sonra köşeli parantez içinde eklenir</li>
+          <li>Makale/bölüm başlıklarında çeviri italik yapılmaz</li>
+          <li>Kitap/tez başlıklarında (italik blok içindeyse) çeviri de italik yapılır</li>
         </ol>
       </div>
-
       <div class="example-pair">
-        <div class="ex-before">
-          <p class="ex-label">Article — before</p>
-          <div class="code-block"><code>Çocuklarda zihin kuramının gelişimi.
-Journal of Edu, 5(2), 10–20.</code></div>
-        </div>
-        <div class="ex-after">
-          <p class="ex-label">Article — after</p>
-          <div class="code-block"><code>Çocuklarda zihin kuramının gelişimi
+        <div class="ex-before"><p class="ex-lbl">Makale — önce</p>
+          <div class="code-block"><code>Zihin kuramının gelişimi.
+Dergisi, 5(2), 10–20.</code></div></div>
+        <div class="ex-after"><p class="ex-lbl">Makale — sonra</p>
+          <div class="code-block"><code>Zihin kuramının gelişimi
 [Development of theory of mind].
-*Journal of Edu*, *5*(2), 10–20.</code></div>
-        </div>
+*Dergisi*, *5*(2), 10–20.</code></div></div>
       </div>
-
       <div class="example-pair">
-        <div class="ex-before">
-          <p class="ex-label">Book — before</p>
-          <div class="code-block"><code>Bilimsel araştırma yöntemi (25th ed.).
-Ankara: Nobel Publishing.</code></div>
-        </div>
-        <div class="ex-after">
-          <p class="ex-label">Book — after</p>
+        <div class="ex-before"><p class="ex-lbl">Kitap — önce</p>
+          <div class="code-block"><code>Bilimsel araştırma yöntemi
+(25th ed.). Ankara: Nobel.</code></div></div>
+        <div class="ex-after"><p class="ex-lbl">Kitap — sonra</p>
           <div class="code-block"><code>*Bilimsel araştırma yöntemi*
 [*Scientific research method*]
-(25th ed.). Nobel Publishing.</code></div>
-        </div>
-      </div>
-
-      <div class="example-pair">
-        <div class="ex-before">
-          <p class="ex-label">Thesis — before</p>
-          <div class="code-block"><code>Öğretmenlerin istatistik bilgisi
-[Unpublished master's thesis].
-Trabzon University.</code></div>
-        </div>
-        <div class="ex-after">
-          <p class="ex-label">Thesis — after</p>
-          <div class="code-block"><code>*Öğretmenlerin istatistik bilgisi*
-[*Teachers' knowledge of statistics*]
-[Unpublished master's thesis].
-Trabzon University.</code></div>
-        </div>
+(25th ed.). Nobel.</code></div></div>
       </div>
     </div>
 
-    <!-- Error Flags -->
     <div class="section" id="errors">
-      <h2>Error Detection &amp; Flags</h2>
-      <p style="font-size:13px;color:var(--gray);margin-bottom:12px;">Flag suspicious entries inline. Include a summary in the notes block at the top of each response.</p>
+      <h2>Hata Bayrakları</h2>
       <table class="error-table">
-        <thead>
-          <tr><th>Issue</th><th>Inline Flag</th></tr>
-        </thead>
+        <thead><tr><th>Sorun</th><th>Bayrak</th></tr></thead>
         <tbody>
-          <tr><td>DOI year ≠ publication year</td><td><span class="flag">[DOI yılı doğrulanmalı]</span></td></tr>
-          <tr><td>Impossible page range (e.g. 212–132)</td><td><span class="flag">[sayfa aralığı doğrulanmalı]</span></td></tr>
-          <tr><td><code>et al.</code> used in reference list</td><td>All authors must be listed explicitly</td></tr>
-          <tr><td>Missing journal or book name</td><td><span class="flag">[dergi/kitap adı eksik]</span></td></tr>
-          <tr><td>Likely typo in author name</td><td>Correct + <span class="flag">[doğrulanmalı]</span></td></tr>
-          <tr><td>Dual publication years (e.g. 1995, 2006)</td><td><span class="flag">[tarih doğrulanmalı]</span></td></tr>
-          <tr><td><code>[In press]</code> entries</td><td>Keep as-is; complete when published</td></tr>
-          <tr><td>Missing page numbers for book chapter</td><td><span class="flag">[sayfa numarası tamamlanmalı]</span></td></tr>
+          <tr><td>DOI yılı ≠ yayın yılı</td><td><span class="flag-badge">[DOI yılı doğrulanmalı]</span></td></tr>
+          <tr><td>Geçersiz sayfa aralığı (örn. 212–132)</td><td><span class="flag-badge">[sayfa aralığı doğrulanmalı]</span></td></tr>
+          <tr><td>Kaynakçada <code>et al.</code></td><td>Tüm yazarlar listelenmeli</td></tr>
+          <tr><td>Dergi/kitap adı eksik</td><td><span class="flag-badge">[dergi/kitap adı eksik]</span></td></tr>
+          <tr><td>Yazar adında yazım hatası</td><td>Düzelt + <span class="flag-badge">[doğrulanmalı]</span></td></tr>
+          <tr><td>Çift yayın yılı</td><td><span class="flag-badge">[tarih doğrulanmalı]</span></td></tr>
         </tbody>
       </table>
     </div>
 
-    <!-- Output Format -->
     <div class="section" id="output">
-      <h2>Output Format</h2>
+      <h2>Çıktı Formatı</h2>
       <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-text"><strong>Notes block</strong> at top — bulleted summary of all changes made and errors detected</div>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-text"><strong>Formatted reference list</strong> — alphabetical by first author surname, hanging indent in markdown</div>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div class="step-text"><strong>Inline flags</strong> on suspicious entries — <code>[doğrulanmalı]</code> or <code>[tamamlanmalı]</code>. No commentary between entries; keep the list clean.</div>
-        </div>
+        <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Notlar bloğu</strong> — yapılan değişiklikler ve tespit edilen hatalar</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Düzenlenmiş kaynakça</strong> — alfabetik, asılı girinti (markdown)</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Satır içi bayraklar</strong> — şüpheli girişlerde <code>[doğrulanmalı]</code></div></div>
       </div>
     </div>
 
-    <!-- Examples -->
     <div class="section" id="examples">
-      <h2>Worked Examples</h2>
-
-      <h3>Journal Article</h3>
+      <h2>Örnekler</h2>
+      <h3>Dergi Makalesi</h3>
       <div class="example-pair">
-        <div class="ex-before">
-          <p class="ex-label">Before</p>
+        <div class="ex-before"><p class="ex-lbl">Önce</p>
+          <div class="code-block"><code>Ball et al. (2008). Content knowledge
+for teaching. Journal of Teacher
+Education, 59(5), 389–407.</code></div></div>
+        <div class="ex-after"><p class="ex-lbl">Sonra</p>
           <div class="code-block"><code>Ball, D. L., Thames, M. H., & Phelps, G.
-(2008). Content knowledge for teaching:
-What makes it special? Journal of Teacher
-Education, 59(5), 389–407.</code></div>
-        </div>
-        <div class="ex-after">
-          <p class="ex-label">After</p>
-          <div class="code-block"><code>Ball, D. L., Thames, M. H., & Phelps, G.
-(2008). Content knowledge for teaching:
-What makes it special? *Journal of Teacher
-Education*, *59*(5), 389–407.</code></div>
-        </div>
+(2008). Content knowledge for teaching.
+*Journal of Teacher Education*,
+*59*(5), 389–407.</code></div></div>
       </div>
-
-      <h3>Turkish Book with City</h3>
+      <h3>Türkçe Kitap</h3>
       <div class="example-pair">
-        <div class="ex-before">
-          <p class="ex-label">Before</p>
+        <div class="ex-before"><p class="ex-lbl">Önce</p>
           <div class="code-block"><code>Karasar, N. (2019). Bilimsel araştırma
-yöntemi (25th ed.). Ankara:
-Nobel Publishing.</code></div>
-        </div>
-        <div class="ex-after">
-          <p class="ex-label">After</p>
+yöntemi (25th ed.). Ankara: Nobel.</code></div></div>
+        <div class="ex-after"><p class="ex-lbl">Sonra</p>
           <div class="code-block"><code>Karasar, N. (2019). *Bilimsel araştırma
 yöntemi* [*Scientific research method*]
-(25th ed.). Nobel Publishing.</code></div>
-        </div>
+(25th ed.). Nobel.</code></div></div>
       </div>
-
-      <h3>Edited Chapter</h3>
-      <div class="example-pair">
-        <div class="ex-before">
-          <p class="ex-label">Before</p>
-          <div class="code-block"><code>Perner, J. (1999). Theory of mind.
-In M. Bennett (Ed.), Developmental
-psychology. Psychology Press.</code></div>
-        </div>
-        <div class="ex-after">
-          <p class="ex-label">After</p>
-          <div class="code-block"><code>Perner, J. (1999). Theory of mind.
-In M. Bennett (Ed.), *Developmental
-psychology*. Psychology Press.</code></div>
-        </div>
-      </div>
-
-      <h3>DOI normalization</h3>
-      <div class="example-pair">
-        <div class="ex-before">
-          <p class="ex-label">Before</p>
-          <div class="code-block"><code>... http://dx.doi.org/10.1007/
-s10648-006-9029-9</code></div>
-        </div>
-        <div class="ex-after">
-          <p class="ex-label">After</p>
-          <div class="code-block"><code>... https://doi.org/10.1007/
-s10648-006-9029-9</code></div>
-        </div>
-      </div>
-
     </div>
 
   </main>
 </div>
+</div>
 
-<!-- ── FOOTER ── -->
 <footer>
-  <p>APA 7 Reference Formatter Skill · <a href="https://pedagogicalperspective.com" target="_blank" rel="noopener">Pedagogical Perspective</a> · eISSN 2822-4841</p>
+  <p>
+    <a href="https://pedagogicalperspective.com" target="_blank" rel="noopener">Pedagogical Perspective</a>
+    &nbsp;·&nbsp; eISSN 2822-4841
+    &nbsp;·&nbsp; <a href="https://github.com/pedagogicalperspective/apaformatter" target="_blank" rel="noopener">GitHub</a>
+  </p>
 </footer>
 
 <script>
-// ── Copy frontmatter ──
-function copyFM(btn) {
-  const text = `---
-name: apa7-formatter
-description: >
-  Formats academic reference lists according to APA 7th edition rules.
-  Use this skill whenever the user pastes a list of references and asks
-  for APA 7 formatting, cleanup, or translation of Turkish titles into
-  English. Triggers on phrases like "APA 7'ye göre düzenle",
-  "kaynakçayı düzelt", "format references", "APA formatına çevir",
-  or when a block of bibliographic entries is pasted with a formatting
-  request. Also triggers when the user asks for Turkish book/article
-  titles to be translated into English in bracket notation.
----`;
+/* ── Tab switch ── */
+function showPage(name, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ── Clear ── */
+function clearInput() {
+  document.getElementById('inputArea').value = '';
+  resetOutput();
+}
+
+function resetOutput() {
+  const out = document.getElementById('outputArea');
+  out.className = 'output-area empty';
+  out.innerHTML = `<svg viewBox="0 0 24 24" style="width:36px;height:36px;fill:#DDD"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM8 13h8v1.5H8V13zm0 3h8v1.5H8V16zm0-6h3v1.5H8V10z"/></svg>Düzenlenmiş kaynakça burada görünecek`;
+  document.getElementById('copyBtn').style.display = 'none';
+}
+
+/* ── Copy ── */
+function copyOutput() {
+  const btn = document.getElementById('copyBtn');
+  const text = document.getElementById('outputArea').dataset.raw || '';
   navigator.clipboard.writeText(text).then(() => {
-    btn.textContent = 'copied ✓';
-    setTimeout(() => btn.textContent = 'copy', 1800);
+    btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:11px;height:11px;fill:currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg> Kopyalandı!`;
+    setTimeout(() => {
+      btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:11px;height:11px;fill:currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg> Kopyala`;
+    }, 2000);
   });
 }
 
-// ── Active nav on scroll ──
-const sections = document.querySelectorAll('.section, h3[id]');
-const allLinks  = document.querySelectorAll('#sidenav a');
+/* ── Format ── */
+async function formatRefs() {
+  const apiKey = document.getElementById('apiKey').value.trim();
+  const input  = document.getElementById('inputArea').value.trim();
+  const addTranslation = document.getElementById('optTurkish').checked;
+  const addFlags       = document.getElementById('optFlags').checked;
+  const errorToast     = document.getElementById('errorToast');
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    const id = entry.target.id;
-    if (!id) return;
-    allLinks.forEach(l => l.classList.remove('active'));
-    const hit = document.querySelector(`#sidenav a[href="#${id}"]`);
+  errorToast.classList.remove('visible');
+  if (!apiKey) { showError('Lütfen Anthropic API anahtarınızı girin.'); return; }
+  if (!input)  { showError('Lütfen düzenlenecek kaynakçayı girin.'); return; }
+
+  const out = document.getElementById('outputArea');
+  out.className = 'output-area loading';
+  out.innerHTML = `<div class="spinner"></div><span>APA 7'ye göre düzenleniyor…</span>`;
+  document.getElementById('formatBtn').disabled = true;
+  document.getElementById('copyBtn').style.display = 'none';
+
+  const systemPrompt = `You are an expert academic reference formatter. Format the given reference list strictly according to APA 7th edition rules.
+
+CORE RULES:
+1. Remove publication cities from books
+2. Shorten publisher names (Sage not Sage Publications)
+3. Normalize DOIs: https://doi.org/ (replace http://dx.doi.org/ and bare DOIs)
+4. Italicize: journal names + volume numbers, book titles, edited book titles
+5. List all authors up to 20; for 21+: first 19, …, last author
+6. Remove "Retrieved from" for stable URLs/DOIs
+7. Edition info: (3rd ed.) after title, before publisher
+8. Journal articles: no "pp." for page ranges
+9. Edited chapters: (Ed.) or (Eds.) correctly
+10. Dissertations: [Unpublished doctoral dissertation] or [Unpublished master's thesis]
+${addTranslation ? `11. TURKISH TITLES: For every Turkish-language title append an English translation in square brackets immediately after the original title. Article/chapter titles: no italics on translation. Book/thesis titles (inside italic block): italicize the translation too.` : ''}
+${addFlags ? `12. ERROR FLAGS: Flag inline with [DOI yılı doğrulanmalı], [sayfa aralığı doğrulanmalı], [dergi/kitap adı eksik], [doğrulanmalı], [tarih doğrulanmalı] where appropriate.` : ''}
+
+OUTPUT FORMAT:
+Start with "NOTLAR:" followed by bullet points listing changes made and errors detected.
+Then output exactly "---" on its own line.
+Then output the formatted reference list, alphabetical by first author surname.
+No commentary between entries. Use markdown asterisks for italics (*text*).`;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 8000,
+        system: systemPrompt,
+        messages: [{ role: 'user', content: input }]
+      })
+    });
+
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({}));
+      throw new Error(err.error?.message || `HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+    const text = data.content?.[0]?.text || '';
+    renderOutput(text);
+
+  } catch (e) {
+    resetOutput();
+    showError('Hata: ' + e.message);
+  } finally {
+    document.getElementById('formatBtn').disabled = false;
+  }
+}
+
+function renderOutput(raw) {
+  const out = document.getElementById('outputArea');
+  out.className = 'output-area';
+  out.dataset.raw = raw;
+
+  const parts = raw.split(/\n---\n/);
+  let notesHtml = '';
+  let refsText = raw;
+
+  if (parts.length >= 2) {
+    const notesBlock = parts[0].replace(/^NOTLAR:\s*/i, '').trim();
+    notesHtml = `<div class="notes-block"><div class="notes-label">Notlar</div>${esc(notesBlock).replace(/\n/g,'<br>')}</div>`;
+    refsText = parts.slice(1).join('\n---\n').trim();
+  }
+
+  const flagged = esc(refsText).replace(
+    /\[(DOI yılı doğrulanmalı|sayfa aralığı doğrulanmalı|dergi\/kitap adı eksik|doğrulanmalı|tarih doğrulanmalı|tamamlanmalı)[^\]]*\]/g,
+    '<span class="flag">[$1]</span>'
+  );
+
+  out.innerHTML = notesHtml + `<div class="refs-output">${flagged}</div>`;
+  document.getElementById('copyBtn').style.display = 'flex';
+}
+
+function esc(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function showError(msg) {
+  const t = document.getElementById('errorToast');
+  t.textContent = msg; t.classList.add('visible');
+}
+
+/* ── Docs nav ── */
+const docSec  = document.querySelectorAll('.docs-main .section, .docs-main h3[id]');
+const navLinks = document.querySelectorAll('#sidenav a');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting || !e.target.id) return;
+    navLinks.forEach(l => l.classList.remove('active'));
+    const hit = document.querySelector(`#sidenav a[href="#${e.target.id}"]`);
     if (hit) hit.classList.add('active');
   });
 }, { rootMargin: '-20% 0px -70% 0px' });
-
-sections.forEach(s => { if (s.id) observer.observe(s); });
+docSec.forEach(s => { if (s.id) obs.observe(s); });
 </script>
-
 </body>
 </html>
